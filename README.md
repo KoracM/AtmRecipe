@@ -140,10 +140,6 @@ AtmRecipeApp/
 │   ├── Products/
 │   ├── Components/
 │   └── Recipe/
-├── memory-bank/         # Project documentation
-│   ├── projectbrief.md
-│   ├── systemPatterns.md
-│   └── ...
 └── TestData1.sql        # Sample data
 ```
 
