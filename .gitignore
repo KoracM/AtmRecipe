@@ -33,6 +33,5 @@ Thumbs.db
 appsettings.Development.json
 
 ## Backup/temporary files
-*kopyası*
 *.bak
 *.tmp
