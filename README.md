@@ -169,17 +169,6 @@ dotnet run
 
 ---
 
-## 📚 Dokümantasyon
-
-Detaylı proje dokümantasyonu `memory-bank/` klasöründe:
-- **projectbrief.md** - Proje tanımı ve gereksinimler
-- **techContext.md** - Teknoloji stack ve kurulum
-- **systemPatterns.md** - Mimari ve tasarım desenleri
-- **progress.md** - İlerleme ve özellik listesi
-- **activeContext.md** - Mevcut durum ve kararlar
-
----
-
 ## 🐛 Bilinen Sorunlar
 
 - **Decimal precision uyarısı**: Logger'da görünür ama çalışmayı etkilemez
