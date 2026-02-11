@@ -1,0 +1,104 @@
+@model AtmRecipeApp.Models.Product
+
+@{
+    ViewData["Title"] = "Ürün Detayı";
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>📦 Ürün Detayı: @Model.Name</h1>
+            <hr />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Ürün Bilgileri</h5>
+                </div>
+                <div class="card-body">
+                    <dl class="row">
+                        <dt class="col-sm-4">ID:</dt>
+                        <dd class="col-sm-8">@Model.Id</dd>
+
+                        <dt class="col-sm-4">Ürün Adı:</dt>
+                        <dd class="col-sm-8">@Model.Name</dd>
+                    </dl>
+
+                    <div class="d-flex gap-2">
+                        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">✏️ Düzenle</a>
+                        <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">🗑️ Sil</a>
+                        <a asp-action="Index" class="btn btn-secondary">← Listeye Dön</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header bg-success text-white d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">🔧 Bileşenler</h5>
+                    <a asp-action="AddComponent" asp-route-id="@Model.Id" class="btn btn-sm btn-light">
+                        ➕ Bileşen Ekle
+                    </a>
+                </div>
+                <div class="card-body">
+                    @if (Model.ProductComponents != null && Model.ProductComponents.Any())
+                    {
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Bileşen</th>
+                                    <th>Miktar</th>
+                                    <th>Fiyat</th>
+                                    <th>Toplam</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var pc in Model.ProductComponents)
+                                {
+                                    <tr>
+                                        <td>@pc.Component.Name</td>
+                                        <td>@pc.Quantity adet</td>
+                                        <td>@pc.Component.Price.ToString("C2")</td>
+                                        <td><strong>@((pc.Component.Price * pc.Quantity).ToString("C2"))</strong></td>
+                                        <td>
+                                            <form asp-action="RemoveComponent" method="post" style="display:inline;">
+                                                @Html.AntiForgeryToken()
+                                                <input type="hidden" name="productId" value="@Model.Id" />
+                                                <input type="hidden" name="componentId" value="@pc.ComponentId" />
+                                                <button type="submit" class="btn btn-sm btn-danger"
+                                                        onclick="return confirm('Bu bileşeni çıkarmak istediğinize emin misiniz?');">
+                                                    🗑️
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                            <tfoot>
+                                <tr class="table-info">
+                                    <th colspan="3">Toplam Maliyet:</th>
+                                    <th colspan="2">
+                                        @Model.ProductComponents.Sum(pc => pc.Component.Price * pc.Quantity).ToString("C2")
+                                    </th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    }
+                    else
+                    {
+                        <div class="alert alert-info" role="alert">
+                            Bu ürüne henüz bileşen eklenmemiş.
+                            <a asp-action="AddComponent" asp-route-id="@Model.Id" class="alert-link">Buraya tıklayarak</a>
+                            bileşen ekleyebilirsiniz.
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

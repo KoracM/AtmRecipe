@@ -1,0 +1,68 @@
+@model IEnumerable<AtmRecipeApp.Models.Product>
+
+@{
+    ViewData["Title"] = "Ürün Yönetimi";
+}
+
+<div class="container mt-4">
+    <div class="row mb-3">
+        <div class="col-md-12">
+            <h1>📦 Ürün Yönetimi</h1>
+            <p class="text-muted">Sistemdeki tüm ürünleri görüntüleyin, düzenleyin veya silin.</p>
+            <a asp-action="Create" class="btn btn-success">
+                ➕ Yeni Ürün Ekle
+            </a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Ürün Listesi</h5>
+                </div>
+                <div class="card-body">
+                    @if (Model != null && Model.Any())
+                    {
+                        <table class="table table-striped table-hover">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Ürün Adı</th>
+                                    <th style="width: 250px;">İşlemler</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var product in Model)
+                                {
+                                    <tr>
+                                        <td>@product.Id</td>
+                                        <td>@product.Name</td>
+                                        <td>
+                                            <a asp-action="Details" asp-route-id="@product.Id" class="btn btn-sm btn-info">
+                                                🔧 Bileşen Ekle ve Düzenle
+                                            </a>
+                                            <a asp-action="Edit" asp-route-id="@product.Id" class="btn btn-sm btn-warning">
+                                                ✏️ Düzenle
+                                            </a>
+                                            <a asp-action="Delete" asp-route-id="@product.Id" class="btn btn-sm btn-danger">
+                                                🗑️ Sil
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    }
+                    else
+                    {
+                        <div class="alert alert-warning" role="alert">
+                            <strong>Uyarı:</strong> Henüz ürün bulunmamaktadır.
+                            <a asp-action="Create" class="alert-link">Buraya tıklayarak</a> yeni ürün ekleyebilirsiniz.
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

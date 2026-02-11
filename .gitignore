@@ -1,0 +1,38 @@
+# .NET Core için .gitignore
+
+## Build sonuçları
+bin/
+obj/
+out/
+
+## Visual Studio
+.vs/
+.vscode/
+
+## User-specific files
+*.user
+*.suo
+
+## Database files
+*.mdf
+*.ldf
+
+## Compiled files
+*.dll
+*.exe
+*.pdb
+
+## NuGet Packages
+packages/
+
+## OS files
+.DS_Store
+Thumbs.db
+
+## Sensitive data (şifre hassas bilgiler)
+appsettings.Development.json
+
+## Backup/temporary files
+*kopyası*
+*.bak
+*.tmp

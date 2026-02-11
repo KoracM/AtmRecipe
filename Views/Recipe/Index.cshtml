@@ -1,0 +1,51 @@
+@model IEnumerable<AtmRecipeApp.Models.Product>
+
+@{
+    ViewData["Title"] = "ATM Ürün Listesi";
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="mb-4">🏧 ATM Reçete Programı</h1>
+            <p class="lead">Bir ATM ürünü seçin, hangi bileşenlere ihtiyaç olduğunu ve toplam fiyatı görün.</p>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        @if (Model != null && Model.Any())
+        {
+            @foreach (var product in Model)
+            {
+                <div class="col-md-6 mb-3">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">@product.Name</h5>
+                            <p class="card-text text-muted">ID: @product.Id</p>
+                            <a href="@Url.Action("ShowRecipe", "Recipe", new { productId = product.Id })" 
+                               class="btn btn-primary">
+                                Reçeteyi Göster
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="col-md-12">
+                <div class="alert alert-warning" role="alert">
+                    <strong>Uyarı:</strong> Henüz ürün bulunmamaktadır. Lütfen veritabanına ürün ekleyin.
+                </div>
+            </div>
+        }
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <div class="alert alert-info" role="alert">
+                <strong>💡 İpucu:</strong> TestData1.sql dosyasını çalıştırarak örnek ürünler ekleyebilirsiniz.
+            </div>
+        </div>
+    </div>
+</div>
