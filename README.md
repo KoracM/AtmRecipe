@@ -81,7 +81,7 @@ dotnet restore
 
 #### 5️⃣ **Uygulamayı Çalıştırın**
 ```bash
-dotnet watch run
+dotnet build && dotnet watch run
 ```
 
 İlk çalıştırmada `AtmRecipeDB` database'i otomatik oluşturulur.
